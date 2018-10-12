@@ -1,0 +1,24 @@
+git config --global http.proxy http://username:password@csez-s500:8080
+
+git config --global https.proxy https://username:password@csez-s500:8080
+
+git config --global --unset http.proxy
+
+git config --global --get http.proxy
+
+
+The reason could be the firewall modification as you are under a network.(In which case they may deliberately block some ports)
+To double check if this is the reason ... do
+
+ssh -T git@github.com
+
+this should timeout. If that's the case use http protocol instead of ssh this way
+just change your url in the config file to http.
+Here is how :-
+
+git config --local -e
+
+change entry of 
+ url = git@github.com:username/repo.git
+to 
+url = https://github.com/username/repo.git
