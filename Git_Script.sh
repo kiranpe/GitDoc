@@ -1,18 +1,38 @@
+#!/bin/sh
+#Script to commit changes in stage to GitHub
 
-Folder=$1
+usage () {
+	echo "usage: sh Git_Script.sh -f GitDoc -fn Git_Script.sh -m updating script with getopts"
+	exit 1
+}
+
+while getopts ":f:fn:m:" opt; do
+	case "{opt}" in
+		
+		f) 
+			Folder=${OPTARG}
+			;;
+                fn)
+			FileName=${OPTARG}
+			;;
+		m)
+			COMMIT_MSG=${OPTARG}
+			;;
+		*)
+			usage
+			;;
+        esac
+done
 
 cd $Folder
-
 
 COMMIT=$( git status | grep "nothing to commit" )
 
 if [ -z "$COMMIT" ];then
 
-File_Name=$2
-git add $File_Name
+git add $FileName
 
-MSG=$3
-git commit -m "$MSG"
+git commit -m "$COMMIT_MSG"
 
 git status 
 
