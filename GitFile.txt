@@ -26,3 +26,7 @@ url = https://github.com/username/repo.git
 To unset password and username
 
 git config --system --unset credential.helper
+
+To get the repo url
+
+git config --get remote.origin.url
